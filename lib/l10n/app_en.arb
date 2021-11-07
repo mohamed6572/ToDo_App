@@ -1,0 +1,14 @@
+{
+  "language": "Langauge",
+  "theme": "Mode",
+  "appbarlist": "To Do List",
+  "appbarset": "Settings",
+  "light": "Light",
+  "dark": "Dark",
+  "title": "Title",
+  "subtitle": "SubTitle",
+  "description": "Description",
+  "date": "Date",
+  "addnewask": "Add new Task",
+  "add": "Add"
+}
