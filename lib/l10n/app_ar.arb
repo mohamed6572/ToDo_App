@@ -8,5 +8,6 @@
   "description": "الوصف",
   "date": "الوقت",
   "addnewask": "أضف مهمة جديدة",
-  "add": "اضف"
+  "add": "اضف",
+  "delete": "مسح"
 }

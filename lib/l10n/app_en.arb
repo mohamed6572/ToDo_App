@@ -10,5 +10,6 @@
   "description": "Description",
   "date": "Date",
   "addnewask": "Add new Task",
-  "add": "Add"
+  "add": "Add",
+  "delete": "Delete"
 }

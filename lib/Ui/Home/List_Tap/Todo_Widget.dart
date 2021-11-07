@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/My_Theme_Data.dart';
 import 'package:to_do_app/Provider/AppConfigProvider.dart';
 
 class Todo_Widget extends StatelessWidget {
@@ -35,7 +34,7 @@ class Todo_Widget extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'Delete',
+                  AppLocalizations.of(context)!.delete,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white),
                 )
