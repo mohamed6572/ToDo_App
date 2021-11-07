@@ -3,8 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/Provider/AppConfigProvider.dart';
 
-import '../LanguageBottomSheet.dart';
-import '../ThemeButtomSheet.dart';
+import 'LanguageBottomSheet.dart';
+import 'ThemeButtomSheet.dart';
 
 class TodoSettingsTpp extends StatefulWidget {
   @override

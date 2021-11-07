@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/Provider/AppConfigProvider.dart';
-import 'package:to_do_app/Ui/Home/todo_ListTap.dart';
-import 'package:to_do_app/Ui/Home/todo_SittingsTap.dart';
+import 'package:to_do_app/Ui/Home/List_Tap/todo_ListTap.dart';
+import 'package:to_do_app/Ui/Home/Settings_Tap/todo_SittingsTap.dart';
 
 import '../../My_Theme_Data.dart';
-import 'AddTodoWidget.dart';
+import 'Add_Widget/AddTodoWidget.dart';
 
 class HomeScrean extends StatefulWidget {
   static const String routeName = 'Home';
