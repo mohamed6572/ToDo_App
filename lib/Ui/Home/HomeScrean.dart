@@ -24,7 +24,7 @@ class _HomeScreanState extends State<HomeScrean> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(AppLocalizations.of(context)!.appbarlist),
+        title: Text(gett()),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -69,6 +69,13 @@ class _HomeScreanState extends State<HomeScrean> {
       ),
       body: tabs[currentIndex],
     );
+  }
+
+  String gett() {
+    if (currentIndex == 0) {
+      return AppLocalizations.of(context)!.appbarlist;
+    }
+    return AppLocalizations.of(context)!.appbarset;
   }
 
   List<Widget> tabs = [

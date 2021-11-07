@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/My_Theme_Data.dart';
 import 'package:to_do_app/Ui/Home/HomeScrean.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Provider/AppConfigProvider.dart';
 

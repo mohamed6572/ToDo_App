@@ -3,6 +3,8 @@
   "theme": "النمط",
   "appbarlist": "المهام",
   "appbarset": "الاعدادات",
+  "light": "مضئ",
+  "dark": "الوضع الداكن",
   "title": "العنوان",
   "subtitle": "العنوان الفرعي",
   "description": "الوصف",
