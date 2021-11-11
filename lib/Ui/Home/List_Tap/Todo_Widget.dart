@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/Provider/AppConfigProvider.dart';
+import 'package:to_do_app/data/FireStoreUtils.dart';
+import 'package:to_do_app/data/Todo.dart';
 
-class Todo_Widget extends StatelessWidget {
+class Todo_Widget extends StatefulWidget {
+  Todo item;
+
+  Todo_Widget(this.item);
+
+  @override
+  State<Todo_Widget> createState() => _Todo_WidgetState();
+}
+
+class _Todo_WidgetState extends State<Todo_Widget> {
+  bool isDone = false;
+
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
@@ -41,11 +55,24 @@ class Todo_Widget extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            deleteTodo(widget.item)
+                .then((value) {
+                  Fluttertoast.showToast(
+                      msg: "task deleted successfully",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.SNACKBAR,
+                      timeInSecForIosWeb: 1,
+                      textColor: Colors.white,
+                      backgroundColor: Colors.green,
+                      fontSize: 16.0);
+                })
+                .onError((error, stackTrace) {})
+                .timeout(Duration(seconds: 10), onTimeout: () {});
+          },
         )
       ],
       child: Container(
-        height: 120,
         padding: EdgeInsets.all(12),
         margin: EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
@@ -60,9 +87,11 @@ class Todo_Widget extends StatelessWidget {
           children: [
             Container(
               width: 3,
-              height: 62,
+              height: 70,
               margin: EdgeInsets.symmetric(vertical: 12),
-              color: Theme.of(context).primaryColor,
+              color: provider.isDone(isDone)
+                  ? Colors.green
+                  : Theme.of(context).primaryColor,
             ),
             Expanded(
                 child: Padding(
@@ -72,23 +101,46 @@ class Todo_Widget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.title,
-                    style: Theme.of(context).textTheme.headline1,
+                    widget.item.title,
+                    style: provider.isDone(isDone)
+                        ? Theme.of(context).textTheme.headline3
+                        : Theme.of(context).textTheme.headline1,
                   ),
                   Text(
-                    AppLocalizations.of(context)!.subtitle,
+                    widget.item.description,
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ],
               ),
             )),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-              decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(12)),
-              child: Image.asset('assets/image/ic_check.png'),
-            )
+            InkWell(
+                onTap: () {
+                  setState(() {
+                    if (isDone == false) {
+                      isDone = true;
+                    }
+                  });
+                },
+                child: provider.isDone(isDone)
+                    ? Text(
+                        'Done!',
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22),
+                      )
+                    : Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                        decoration: BoxDecoration(
+                            color: provider.isDone(isDone)
+                                ? Colors.green
+                                : Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Image.asset(
+                          'assets/image/ic_check.png',
+                        ),
+                      ))
           ],
         ),
       ),
