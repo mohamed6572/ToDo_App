@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:to_do_app/data/FireStoreUtils.dart';
+import 'package:to_do_app/data/Todo.dart';
 
 import 'Todo_Widget.dart';
 
@@ -45,21 +49,51 @@ class _TodoListAppState extends State<TodoListApp> {
                   color: Colors.white, borderRadius: BorderRadius.circular(8)),
               defaultTextStyle: TextStyle(color: Colors.black),
             ),
+            headerStyle: HeaderStyle(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      topRight: Radius.circular(8),
+                    ))),
             weekendDays: [],
             daysOfWeekStyle: DaysOfWeekStyle(
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  )),
               weekdayStyle: TextStyle(
                 color: Colors.black,
               ),
             ),
           ),
           Expanded(
-              child: ListView.builder(
-            itemBuilder: (BuildContext, index) {
-              return Todo_Widget();
+              child: StreamBuilder<QuerySnapshot<Todo>>(
+            stream: getTodosCollectionWithConverter()
+                .where('dateTime',
+                    isEqualTo: selectedDay.getDateOnly().millisecondsSinceEpoch)
+                .snapshots(),
+            builder: (BuildContext buildContext,
+                AsyncSnapshot<QuerySnapshot<Todo>> snapshot) {
+              if (snapshot.hasError) {
+                return Center(child: Text(snapshot.error.toString()));
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                // loading
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              List<Todo> items =
+                  snapshot.data!.docs.map((doc) => doc.data()).toList();
+              return ListView.builder(
+                itemBuilder: (buildContext, index) {
+                  return Todo_Widget(items[index]);
+                },
+                itemCount: items.length,
+              );
             },
-            itemCount: 20,
           ))
         ],
       ),

@@ -8,6 +8,13 @@ class AppConfigProvider extends ChangeNotifier {
     return appTheme == ThemeMode.dark;
   }
 
+  bool isDone(bool isd) {
+    if (isd == true) {
+      return isd = true;
+    }
+    return isd = false;
+  }
+
   void changeTheme(ThemeMode newMode) {
     if (newMode == appTheme) {
       return;

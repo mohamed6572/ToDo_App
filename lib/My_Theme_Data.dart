@@ -12,6 +12,8 @@ class MyThemeData {
             fontSize: 18,
             color: Colors.black,
           ),
+          headline3: TextStyle(
+              fontSize: 25, color: Colors.green, fontWeight: FontWeight.bold),
           subtitle1: TextStyle(fontSize: 18, color: Colors.black45),
           subtitle2: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black)),
@@ -25,6 +27,8 @@ class MyThemeData {
             fontSize: 18,
             color: Colors.white,
           ),
+          headline3: TextStyle(
+              fontSize: 25, color: Colors.green, fontWeight: FontWeight.bold),
           subtitle1: TextStyle(fontSize: 18, color: Colors.white),
           subtitle2: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white)),
