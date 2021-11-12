@@ -6,6 +6,7 @@ import 'package:to_do_app/My_Theme_Data.dart';
 import 'package:to_do_app/Ui/Home/HomeScrean.dart';
 
 import 'Provider/AppConfigProvider.dart';
+import 'Ui/Home/List_Tap/Edit_List_Widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         HomeScrean.routeName: (context) => HomeScrean(),
+        Edit_List_Widget.routeName: (context) => Edit_List_Widget(),
       },
       initialRoute: HomeScrean.routeName,
     );

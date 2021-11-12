@@ -7,6 +7,8 @@ import 'package:to_do_app/Provider/AppConfigProvider.dart';
 import 'package:to_do_app/data/FireStoreUtils.dart';
 import 'package:to_do_app/data/Todo.dart';
 
+import 'Edit_List_Widget.dart';
+
 class Todo_Widget extends StatefulWidget {
   Todo item;
 
@@ -100,11 +102,16 @@ class _Todo_WidgetState extends State<Todo_Widget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    widget.item.title,
-                    style: provider.isDone(isDone)
-                        ? Theme.of(context).textTheme.headline3
-                        : Theme.of(context).textTheme.headline1,
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, Edit_List_Widget.routeName);
+                    },
+                    child: Text(
+                      widget.item.title,
+                      style: provider.isDone(isDone)
+                          ? Theme.of(context).textTheme.headline3
+                          : Theme.of(context).textTheme.headline1,
+                    ),
                   ),
                   Text(
                     widget.item.description,
