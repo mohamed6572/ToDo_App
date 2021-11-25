@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/Provider/AppConfigProvider.dart';
-import 'package:to_do_app/Ui/Home/todo_ListTap.dart';
-import 'package:to_do_app/Ui/Home/todo_SittingsTap.dart';
+import 'package:to_do_app/Ui/Home/List_Tap/todo_ListTap.dart';
+import 'package:to_do_app/Ui/Home/Settings_Tap/todo_SittingsTap.dart';
 
 import '../../My_Theme_Data.dart';
-import 'AddTodoWidget.dart';
+import 'Add_Widget/AddTodoWidget.dart';
 
 class HomeScrean extends StatefulWidget {
   static const String routeName = 'Home';
@@ -24,7 +24,7 @@ class _HomeScreanState extends State<HomeScrean> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(AppLocalizations.of(context)!.appbarlist),
+        title: Text(gett()),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -67,8 +67,22 @@ class _HomeScreanState extends State<HomeScrean> {
         shape: CircularNotchedRectangle(),
         notchMargin: 8,
       ),
-      body: tabs[currentIndex],
+      body: Stack(children: [
+        Container(
+          color: Theme.of(context).primaryColor,
+          height: MediaQuery.of(context).size.height * 0.1,
+          width: MediaQuery.of(context).size.width,
+        ),
+        tabs[currentIndex]
+      ]),
     );
+  }
+
+  String gett() {
+    if (currentIndex == 0) {
+      return AppLocalizations.of(context)!.appbarlist;
+    }
+    return AppLocalizations.of(context)!.appbarset;
   }
 
   List<Widget> tabs = [
