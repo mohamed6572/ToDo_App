@@ -67,7 +67,14 @@ class _HomeScreanState extends State<HomeScrean> {
         shape: CircularNotchedRectangle(),
         notchMargin: 8,
       ),
-      body: tabs[currentIndex],
+      body: Stack(children: [
+        Container(
+          color: Theme.of(context).primaryColor,
+          height: MediaQuery.of(context).size.height * 0.1,
+          width: MediaQuery.of(context).size.width,
+        ),
+        tabs[currentIndex]
+      ]),
     );
   }
 

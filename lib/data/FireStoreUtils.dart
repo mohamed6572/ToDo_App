@@ -37,3 +37,17 @@ Future<void> deleteTodo(Todo item) {
   DocumentReference<Todo> itemDoc = collectionReference.doc(item.id);
   return itemDoc.delete();
 }
+
+void editDone(Todo item) {
+  CollectionReference todoRef = getTodosCollectionWithConverter();
+  todoRef.doc(item.id).update({'isDone': item.isDone ? false : true});
+}
+
+Future<void> editTaskItem(Todo item) async {
+  CollectionReference todoRef = getTodosCollectionWithConverter();
+  return todoRef.doc(item.id).update({
+    'title': item.title,
+    'description': item.description,
+    'dateTime': item.dateTime.getDateOnly().millisecondsSinceEpoch
+  });
+}

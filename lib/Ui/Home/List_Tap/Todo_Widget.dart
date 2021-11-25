@@ -19,7 +19,6 @@ class Todo_Widget extends StatefulWidget {
 }
 
 class _Todo_WidgetState extends State<Todo_Widget> {
-  bool isDone = false;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +90,7 @@ class _Todo_WidgetState extends State<Todo_Widget> {
               width: 3,
               height: 70,
               margin: EdgeInsets.symmetric(vertical: 12),
-              color: provider.isDone(isDone)
+              color: widget.item.isDone
                   ? Colors.green
                   : Theme.of(context).primaryColor,
             ),
@@ -104,11 +103,12 @@ class _Todo_WidgetState extends State<Todo_Widget> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, Edit_List_Widget.routeName);
+                      Navigator.pushNamed(context, Edit_List_Widget.routeName,
+                          arguments: widget.item);
                     },
                     child: Text(
                       widget.item.title,
-                      style: provider.isDone(isDone)
+                      style: widget.item.isDone
                           ? Theme.of(context).textTheme.headline3
                           : Theme.of(context).textTheme.headline1,
                     ),
@@ -121,14 +121,8 @@ class _Todo_WidgetState extends State<Todo_Widget> {
               ),
             )),
             InkWell(
-                onTap: () {
-                  setState(() {
-                    if (isDone == false) {
-                      isDone = true;
-                    }
-                  });
-                },
-                child: provider.isDone(isDone)
+                onTap: () => editDone(widget.item),
+                child: widget.item.isDone
                     ? Text(
                         'Done!',
                         style: TextStyle(
@@ -140,14 +134,14 @@ class _Todo_WidgetState extends State<Todo_Widget> {
                         padding:
                             EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                         decoration: BoxDecoration(
-                            color: provider.isDone(isDone)
+                            color: widget.item.isDone
                                 ? Colors.green
                                 : Theme.of(context).primaryColor,
                             borderRadius: BorderRadius.circular(12)),
                         child: Image.asset(
                           'assets/image/ic_check.png',
                         ),
-                      ))
+                      )),
           ],
         ),
       ),
